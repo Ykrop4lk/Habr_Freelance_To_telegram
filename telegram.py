@@ -45,7 +45,6 @@ async def send_welcome(message: types.Message):
 
 async def send_task(list, chat_id):
     for tasks in list:
-        await asyncio.sleep(2)
         task_id = tasks_db_operator.get_task_id(tasks)
         keyboard = InlineKeyboardMarkup(row_width=1)
         keyboard.add(InlineKeyboardButton(text="Ссылка", url=tasks_db_operator.get_url_by_task_id(task_id)))
@@ -59,6 +58,7 @@ async def send_task(list, chat_id):
                 f"\n`{tasks_db_operator.get_date_by_task_id(task_id)}`")
 
         await bot.send_message(text=text, chat_id="-1001958772967", reply_markup=keyboard, parse_mode="markdown")
+        await asyncio.sleep(5)
 
 @dp.callback_query_handler(lambda c: c.data == "delete")
 async def process_callback(callback_query: types.CallbackQuery):
