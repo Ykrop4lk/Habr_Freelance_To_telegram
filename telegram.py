@@ -30,6 +30,7 @@ async def send_welcome(message: types.Message):
     await message.reply("Привет! Я начну опрашивать БД и отправлять обновления в канал.")
     last_upd = await check_db_changes() # Последний обработанный id
     while True:
+        print(1)
         Habr_Scrapper.get_parsed_info(habr_url)
         db_changes = await check_db_changes()
         if last_upd != db_changes:
