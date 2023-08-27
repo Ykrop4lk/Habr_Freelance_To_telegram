@@ -15,5 +15,6 @@ if not settings.read('Keys.ini'):
         settings.write(config_file)
         config_file.close()
 
+
 # Запускаем другой файл
 subprocess.run(["python", "telegram.py"])

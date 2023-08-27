@@ -45,6 +45,7 @@ async def send_welcome(message: types.Message):
 
 async def send_task(list, chat_id):
     for tasks in list:
+        await asyncio.sleep(2)
         task_id = tasks_db_operator.get_task_id(tasks)
         keyboard = InlineKeyboardMarkup(row_width=1)
         keyboard.add(InlineKeyboardButton(text="Ссылка", url=tasks_db_operator.get_url_by_task_id(task_id)))
