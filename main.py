@@ -1,10 +1,7 @@
 import configparser
-import telegram
-import api
+import subprocess
 
-# url = 'https://freelance.habr.com/tasks?categories=development_backend,development_prototyping,development_bots,development_scripts,development_voice_interfaces,development_other,admin_databases,admin_other'
-#
-# print(api.get_parsed_info(url))
+
 
 print("Starting...")
 
@@ -18,3 +15,5 @@ if not settings.read('Keys.ini'):
         settings.write(config_file)
         config_file.close()
 
+# Запускаем другой файл
+subprocess.run(["python", "telegram.py"])
