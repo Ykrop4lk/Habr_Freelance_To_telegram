@@ -9,7 +9,6 @@ import asyncio
 from aiogram import types
 import configparser
 import sqlite3
-
 import Habr_Scrapper
 import tasks_db_operator
 
@@ -29,7 +28,7 @@ dp = Dispatcher(bot, storage=storage)
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     await message.reply("Привет! Я начну опрашивать БД и отправлять обновления в канал.")
-    last_upd = 0  # Последний обработанный id
+    last_upd = await check_db_changes() # Последний обработанный id
     while True:
         Habr_Scrapper.get_parsed_info(habr_url)
         db_changes = await check_db_changes()
@@ -38,7 +37,6 @@ async def send_welcome(message: types.Message):
             last_upd = db_changes
             number_list = list(range(last_upd_last + 1, last_upd + 1))
             asyncio.create_task(send_task(number_list, message.chat.id))
-            break
 
         await asyncio.sleep(15)
 
