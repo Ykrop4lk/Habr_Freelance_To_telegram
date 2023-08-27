@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import configparser
+import telegram
+import api
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# url = 'https://freelance.habr.com/tasks?categories=development_backend,development_prototyping,development_bots,development_scripts,development_voice_interfaces,development_other,admin_databases,admin_other'
+#
+# print(api.get_parsed_info(url))
 
+print("Starting...")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+settings = configparser.ConfigParser()
 
+if not settings.read('Keys.ini'):
+    telegram_key = input('Для начала работы введите Telegram токен:')
+    habr_link = input('Для начала работы введите Ссылку на Habr с параметрами поиска:')
+    settings['PARAMS'] = {'telegram_key': telegram_key, 'habr_link': habr_link}
+    with open('Keys.ini', 'w') as config_file:
+        settings.write(config_file)
+        config_file.close()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
