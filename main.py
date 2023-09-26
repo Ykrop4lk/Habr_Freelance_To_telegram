@@ -1,6 +1,26 @@
 import configparser
 import subprocess
-import bs4
+import sqlite3
+
+conn = sqlite3.connect("database/tasks.db")
+cur = conn.cursor()
+
+cur.execute('''
+        CREATE TABLE IF NOT EXISTS tasks (
+            id INTEGER PRIMARY KEY,
+            task_id TEXT,
+            title TEXT,
+            price TEXT,
+            "date" TEXT,
+            responce TEXT,
+            description TEXT,
+            tags TEXT,
+            href TEXT
+        )
+    ''')
+
+conn.commit()
+conn.close()
 
 print("Starting...")
 
