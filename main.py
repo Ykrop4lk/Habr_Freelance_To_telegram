@@ -18,7 +18,6 @@ cur.execute('''
             href TEXT
         )
     ''')
-
 conn.commit()
 conn.close()
 
