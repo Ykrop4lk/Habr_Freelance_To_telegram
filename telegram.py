@@ -83,11 +83,12 @@ async def process_callback(callback_query: types.CallbackQuery):
 async def check_db_changes():
     conn = sqlite3.connect('database/tasks.db')  # Замените на имя вашей БД
     cursor = conn.cursor()
+    last_record = 0
     try:
         cursor.execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1")  # Замените на вашу таблицу и поле
         last_record = cursor.fetchone()[0]
     except:
-        last_record = 0
+        pass
 
     return last_record
 
